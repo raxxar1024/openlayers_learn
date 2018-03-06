@@ -36,11 +36,16 @@
             }
         })
     });
+	
+	var OSM_map = new ol.layer.Tile({
+            source: new ol.source.OSM()
+          });
 
     // 创建地图
   var map = new ol.Map({
         layers: [
-            baiduMapLayer
+            baiduMapLayer,
+			//OSM_map,
         ],
         view: new ol.View({
             // 设置成都为地图中心
