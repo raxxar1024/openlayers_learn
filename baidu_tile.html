@@ -2,13 +2,11 @@
 <html>
   <head>
     <title>XYZ</title>
-    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.4/css/ol.css" type="text/css">
-    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
-    <script src="https://openlayers.org/en/v4.6.4/build/ol.js"></script>
+    <link rel="stylesheet" href="static/ol.css" type="text/css">    
+    <script src="static/ol.js"></script>
   </head>
   <body>
-    <div id="baiduMap" style="width:800px;height:540px"></div>
+    <div id="baiduMap" class="map"></div>
 <script>
     // 百度地图层
     var baiduMapLayer = new ol.layer.Tile({

@@ -1,28 +1,40 @@
 ﻿<!DOCTYPE html>
 <html>
   <head>
-    <title>XYZ</title>
+    <title>XYZ Retina Tiles</title>
     <link rel="stylesheet" href="https://openlayers.org/en/v4.6.4/css/ol.css" type="text/css">
-    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
     <script src="https://openlayers.org/en/v4.6.4/build/ol.js"></script>
   </head>
   <body>
     <div id="map" class="map"></div>
     <script>
+      var mapMinZoom = 10;
+      var mapMaxZoom = 12;
+      var mapExtent = [113.790454,30.263795, 114.835529,30.88571];
+
       var map = new ol.Map({
         target: 'map',
-		
         layers: [
           new ol.layer.Tile({
+            source: new ol.source.OSM()
+          }),
+          new ol.layer.Tile({
+            extent: ol.proj.transformExtent(mapExtent, 'EPSG:4326', 'EPSG:3857'),
             source: new ol.source.XYZ({
-              url: 'tiles/{z}/tile-{x}_{y}.png'
+              attributions: 'Tiles © USGS, rendered with ' +
+                  '<a href="http://www.maptiler.com/">MapTiler</a>',
+              url: 'https://tileserver.maptiler.com/grandcanyon@2x/{z}/{x}/{y}.png',
+              tilePixelRatio: 2, // THIS IS IMPORTANT
+              minZoom: mapMinZoom,
+              maxZoom: mapMaxZoom
             })
           })
         ],
         view: new ol.View({
-          center: [-472202, 7530279],
-          zoom: 12
+          projection: 'EPSG:3857',
+          center: ol.proj.transform([114.304061889648, 30.577262878418],
+              'EPSG:4326', 'EPSG:3857'),
+          zoom: 10
         })
       });
     </script>
